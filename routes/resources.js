@@ -14,7 +14,7 @@ router.use(express.static(path.join(resourcesDir, 'public'), {
     index: false
 }));
 
-router.use(authenticate, express.static(path.join(resourcesDir, 'authenticated'), {
+router.use(authenticate, express.static(path.join(resourcesDir, 'private'), {
     dotfiles: 'ignore',
     index: false
 }));

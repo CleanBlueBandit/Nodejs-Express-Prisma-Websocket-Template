@@ -1,5 +1,5 @@
 {
-  "name": "chess-online",
+  "name": "express-prisma-websocket-template",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -16,14 +16,12 @@
     "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "bcrypt": "^6.0.0",
-    "chess.js": "^1.0.0",
     "connect-pg-simple": "^10.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^18.0.8",
     "express": "^5.3.0",
     "express-rate-limit": "^8.7.1",
     "express-session": "^1.19.0",
-    "helmet": "^8.3.0",
     "pg": "^8.23.1",
     "socket.io": "^4.8.4"
   },

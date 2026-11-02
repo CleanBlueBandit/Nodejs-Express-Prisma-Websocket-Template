@@ -11,11 +11,9 @@ import { sendPublic } from './helpers.js';
 import authRouter from './routes/auth.js';
 import pagesRouter from './routes/pages.js';
 import srcRouter from './routes/resources.js';
-import gamesRouter from './routes/games.js';
 import { requestLogger } from './routes/middleware.js';
 import { initSocket, io } from './ws/socket.js';
 import prisma from './db/prisma.js';
-import { disposeAllGames } from './game/manager.js';
 
 //#region Setup
 const __filename = fileURLToPath(import.meta.url);
@@ -104,11 +102,6 @@ async function shutdown(signal) {
                 });
             });
         }
-
-        disposeAllGames();
-
-        const result = await prisma.game.deleteMany({});
-        console.log(`Deleted ${result.count} games.`);
 
         await sessionStore.close();
         await pgPool.end();

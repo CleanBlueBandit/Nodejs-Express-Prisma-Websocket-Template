@@ -1,5 +1,4 @@
 import { Server } from 'socket.io';
-import { registerGameHandlers } from './gameSocket.js';
 
 export let io;
 
@@ -23,7 +22,6 @@ export function initSocket(httpServer, sessionMiddleware) {
 
     io.on('connection', (socket) => {
         socket.join(`user:${socket.data.userId}`);
-        registerGameHandlers(io, socket);
 
         console.log(`Socket connected for user ${socket.data.userId}`);
 
@@ -35,17 +33,11 @@ export function initSocket(httpServer, sessionMiddleware) {
     return io;
 }
 
-export function notifyMatchFound(game) {
+// Send an event to every socket a given user has open.
+export function emitToUser(userId, event, data) {
     if (!io) {
         throw new Error('Socket.IO has not been initialized');
     }
 
-    const data = {
-        gameId: game.id,
-        player1Id: game.player1Id,
-        player2Id: game.player2Id
-    };
-
-    io.to(`user:${game.player1Id}`).emit('match_found', data);
-    io.to(`user:${game.player2Id}`).emit('match_found', data);
+    io.to(`user:${userId}`).emit(event, data);
 }
